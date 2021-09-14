@@ -1,5 +1,6 @@
 package com.gokloud.tdd.controller;
 
+import com.gokloud.tdd.constants.UrlConstants;
 import com.gokloud.tdd.dto.SaveUserDto;
 import com.gokloud.tdd.model.User;
 import com.gokloud.tdd.service.UserService;
@@ -13,18 +14,23 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping(value = "/user")
+	@GetMapping(value = UrlConstants.USER)
 	public User getUser(@RequestParam Long userId){
 		return userService.getUser(userId);
 	}
 
-	@PostMapping(value = "/user")
+	@PostMapping(value = UrlConstants.USER)
 	public User saveUser(@RequestBody SaveUserDto userDto){
 		return userService.saveUser(userDto);
 	}
 
-	@PutMapping(value = "/user")
+	@PutMapping(value = UrlConstants.USER)
 	public User updateUser(@RequestBody SaveUserDto userDto,@RequestParam Long userId){
 		return userService.updateUser(userDto,userId);
+	}
+
+	@GetMapping(value = UrlConstants.TEST)
+	public User get(){
+		return userService.get();
 	}
 }

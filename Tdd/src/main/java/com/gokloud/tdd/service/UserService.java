@@ -10,4 +10,6 @@ public interface UserService {
     User saveUser(SaveUserDto userDto);
 
     User updateUser(SaveUserDto userDto, Long userId);
+
+    User get();
 }

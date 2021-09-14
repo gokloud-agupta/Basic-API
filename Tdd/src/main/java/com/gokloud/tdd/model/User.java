@@ -1,7 +1,11 @@
 package com.gokloud.tdd.model;
+import javax.persistence.*;
 
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String email;
@@ -11,6 +15,9 @@ public class User {
     private String firstName;
 
     private String lastName;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Role role;
 
     public Long getId() {
         return id;
@@ -59,5 +66,7 @@ public class User {
         this.lastName = lastName;
     }
 
+    public User() {
+    }
 
 }

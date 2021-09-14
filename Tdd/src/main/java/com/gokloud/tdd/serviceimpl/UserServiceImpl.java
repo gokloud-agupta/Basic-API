@@ -19,15 +19,26 @@ public class UserServiceImpl extends MessageConstants implements UserService {
 
 	@Override
 	public User getUser(Long userId) {
-		Optional<User> user=userDao.findById(userId);
-		if(user.isPresent()){
-			return user.get();
+		Optional<User> userDetail=userDao.findById(userId);
+		if(userDetail.isPresent()){
+			return userDetail.get();
 		}
 		return  null;
+
+
+//		Optional<User> userDetail=userDao.findByEmail("");
+//		if(userDetail.isPresent()){
+//		return userDetail.get();
+//		}
 	}
 
 	@Override
 	public User saveUser(SaveUserDto userDto) {
+		Optional<User> isUserExist = userDao.findByEmail(userDto.getEmail());
+		if(isUserExist.isPresent()){
+			//User already exist by this email
+			return  null;
+		}
 		User user = new User(userDto.getEmail(),userDto.getPhoneNo(),userDto.getFirstName(),userDto.getLastName());
 		return userDao.save(user);
 	}
@@ -44,5 +55,11 @@ public class UserServiceImpl extends MessageConstants implements UserService {
 		}else{
 			return null;
 		}
+	}
+
+	@Override
+	public User get() {
+		User user = new User("ad","sss","shkdvbcln","hycv");
+		return user;
 	}
 }
